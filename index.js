@@ -20,6 +20,10 @@ app.get("/",(req,res) => {
     res.render("index");
 })
 
+app.get("*",(req,res) => {
+    res.send("<h1>Error 404 Not Found</h1>");
+})
+
 app.listen(PORT,(err) => {
     if(err) {
         console.log(err);
