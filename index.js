@@ -9,12 +9,14 @@ app.set("view engine","ejs");
 // require apiData route
 const apiData = require("./routes/apiData");
 const addRecipe = require("./routes/addRecipe");
+const registerUser = require("./routes/registerUser");
 
 app.use(cors());
 app.use(express.json());
 
 app.use("/",apiData);
 app.use("/",addRecipe);
+app.use("/",registerUser);
 
 app.get("/",(req,res) => {
     res.render("index");
