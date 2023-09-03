@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 8080;
 
 app.set("view engine","ejs");
 
-// require apiData route
+
 const apiData = require("./routes/apiData");
 const addRecipe = require("./routes/addRecipe");
 const registerUser = require("./routes/registerUser");
