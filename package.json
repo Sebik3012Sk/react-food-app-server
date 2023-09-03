@@ -7,8 +7,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "build" : "netlify deploy --prod"
+    "start": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
