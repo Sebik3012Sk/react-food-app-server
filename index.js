@@ -19,7 +19,7 @@ app.use("/",addRecipe);
 app.use("/",registerUser);
 
 app.get("/",(req,res) => {
-    res.render("index");
+    res.send("<h1>Hello World</h1>")
 })
 
 app.get("*",(req,res) => {
