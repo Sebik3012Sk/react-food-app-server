@@ -10,6 +10,7 @@ app.set("view engine","ejs");
 const apiData = require("./routes/apiData");
 const addRecipe = require("./routes/addRecipe");
 const registerUser = require("./routes/registerUser");
+const test = require("./routes/test");
 
 app.use(cors());
 app.use(express.json());
@@ -17,9 +18,10 @@ app.use(express.json());
 app.use("/",apiData);
 app.use("/",addRecipe);
 app.use("/",registerUser);
+app.use("/",test);
 
 app.get("/",(req,res) => {
-    res.render("index");
+    // res.render("index");
 })
 
 app.get("*",(req,res) => {
