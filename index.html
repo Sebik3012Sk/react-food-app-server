@@ -26,13 +26,11 @@
       <button type="submit">Submit</button>
     </form>
 
-    <img id="imageTag" alt="Image from DB" />
+    <!-- <img id="imageTag" alt="Image from DB" /> -->
 
-    <button onclick="getData()">Load Data</button>
-    <button onclick="loadImage()">Load Image</button>
+    <button onclick="getData()">Load Data with Image</button>
 
     <script>
-      let data;
       const getData = async () => {
         const response = await fetch("http://localhost:8080/api-data", {
           method: "GET",
@@ -42,13 +40,12 @@
           return `HTTP ERROR! status: ${response.status}`;
         }
 
-        data = await response.json();
+        const data = await response.json();
         console.log("Data", data[0]);
-      };
 
-      const loadImage = () => {
-        document.getElementById("imageTag").src = `uploads/${data[0].image}`;
-        console.log("Loaded");
+        const imageElement = document.createElement("img");
+        imageElement.src = `uploads/${data[0].image}`;
+        document.body.appendChild(imageElement);
       };
     </script>
   </body>
