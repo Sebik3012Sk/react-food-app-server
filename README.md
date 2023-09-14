@@ -2,4 +2,13 @@
 
 Api link with database
 
-# TEST REPO
+# Database connection
+
+To connect to database you need mysql and replace your data in .env file
+
+```
+HOST=your_host
+USER=your_db_user
+PASSWORD=your_db_password
+DATABASE=your_db_name
+```
