@@ -1,14 +1,14 @@
-const { createConnection } = require("mysql");
 const postDatadb = require("express").Router();
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
+const database = require("../database/connection");
 
-const database = createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "react-recipes-db",
-});
+// const database = createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "",
+//   database: "react-recipes-db",
+// });
 
 // postDatadb.post("/post-datadb",(req,res) => {
 //     const { title , image , recipe_text } = req.body;

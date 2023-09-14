@@ -1,13 +1,13 @@
 const apiData = require("express").Router();
-const { createConnection } = require("mysql");
+const database = require("../database/connection");
 
-const database = createConnection({
-  host: "localhost",
-  user: "root",
-  database: "react-recipes-db",
-  password: "",
-  connectionLimit: 10,
-});
+// const database = createConnection({
+//   host: "localhost",
+//   user: "root",
+//   database: "react-recipes-db",
+//   password: "",
+//   connectionLimit: 10,
+// });
 
 // apiData.get("/api-data",(req,res) => {
 //     database.query("SELECT * FROM `recipes`",(err,result,fields) => {

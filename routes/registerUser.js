@@ -1,12 +1,12 @@
 const registerUser = require("express").Router();
-const { createConnection } = require("mysql");
+const database = require("../database/connection");
 
-const database = createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "react-recipes-db",
-});
+// const database = createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "",
+//   database: "react-recipes-db",
+// });
 
 // registerUser.post("/register-user", (req, res) => {
 //   const { email, password } = req.body;
