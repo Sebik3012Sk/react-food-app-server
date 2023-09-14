@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form
+      action="http://localhost:8080/post-datadb"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <div>
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" />
+      </div>
+      <div>
+        <label for="image">Image</label>
+        <input type="file" id="image" name="image" />
+      </div>
+      <div>
+        <label for="recipeText">Recipe Text</label>
+        <input type="text" id="recipeText" name="recipeText" />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+
+    <img id="imageTag" alt="Image from DB" />
+
+    <button onclick="getData()">Load Data</button>
+    <button onclick="loadImage()">Load Image</button>
+
+    <script>
+      let data;
+      const getData = async () => {
+        const response = await fetch("http://localhost:8080/api-data", {
+          method: "GET",
+        });
+
+        if (!response.ok) {
+          return `HTTP ERROR! status: ${response.status}`;
+        }
+
+        data = await response.json();
+        console.log("Data", data[0]);
+      };
+
+      const loadImage = () => {
+        document.getElementById("imageTag").src = `uploads/${data[0].image}`;
+        console.log("Loaded");
+      };
+    </script>
+  </body>
+</html>
