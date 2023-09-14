@@ -11,9 +11,8 @@ const addRecipe = require("./routes/addRecipe");
 const registerUser = require("./routes/registerUser");
 const test = require("./routes/test");
 
-app.use("/uploads", express.static("uploads"));
-
 app.use(cors());
+app.use("/uploads", express.static("uploads"));
 app.use(express.json());
 
 app.use("/", apiData);
@@ -25,9 +24,9 @@ app.get("/", (req, res) => {
   // res.render("index");
 });
 
-app.get("*", (req, res) => {
-  res.send("<h1>Error 404 Not Found</h1>");
-});
+// app.get("*", (req, res) => {
+//   res.send("<h1>Error 404 Not Found</h1>");
+// });
 
 app.listen(PORT, (err) => {
   if (err) {

@@ -1,7 +1,7 @@
 const postDatadb = require("express").Router();
 const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
 const database = require("../database/connection");
+const path = require("path");
 
 // const database = createConnection({
 //   host: "localhost",
@@ -31,6 +31,17 @@ const database = require("../database/connection");
 //         console.log(result);
 //     })
 // })
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./uploads");
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
 
 postDatadb.post("/post-datadb", upload.single("image"), (req, res) => {
   console.log(req.file, req.body);
