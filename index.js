@@ -11,9 +11,10 @@ const addRecipe = require("./routes/addRecipe");
 const registerUser = require("./routes/registerUser");
 const test = require("./routes/test");
 
+app.use("/uploads", express.static("uploads"));
+
 app.use(cors());
 app.use(express.json());
-app.use("/uploads", express.static("images"));
 
 app.use("/", apiData);
 app.use("/", addRecipe);
