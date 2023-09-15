@@ -10,12 +10,14 @@ const apiData = require("./routes/apiData");
 const addRecipe = require("./routes/addRecipe");
 const registerUser = require("./routes/registerUser");
 const test = require("./routes/test");
+const singleApiData = require("./routes/singleApiData");
 
 app.use(cors());
 app.use("/uploads", express.static("uploads"));
 app.use(express.json());
 
 app.use("/", apiData);
+app.use("/", singleApiData);
 app.use("/", addRecipe);
 app.use("/", registerUser);
 app.use("/", test);
