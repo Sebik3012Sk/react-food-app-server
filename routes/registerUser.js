@@ -1,40 +1,39 @@
 const registerUser = require("express").Router();
 const database = require("../database/connection");
+const bcrypt = require("bcryptjs")
 
-// const database = createConnection({
-//   host: "localhost",
-//   user: "root",
-//   password: "",
-//   database: "react-recipes-db",
-// });
-
-// registerUser.post("/register-user", (req, res) => {
-//   const { email, password } = req.body;
-//   console.log("email", email);
-//   console.log("password", password);
-
-//   const sql_query = `INSERT INTO users (email, password) VALUES ('${email}', '${password}')`;
-//   database.query(sql_query, (error, results, fields) => {
-//     if (error) {
-//       console.log(error);
-//     }
-
-//     console.log(fields);
-//   });
-// });
-
+// Register user route
 registerUser.post("/register-user", (req, res) => {
-  const query = "INSERT INTO users (`email`, `password`) VALUES (?)";
-  const values = [req.body.email, req.body.password];
 
-  // req.body.password - treba zahashovat heslo
-
-  database.query(query, [values], (error, data) => {
+  // Check if user already exist
+  const query = "SELECT * FROM users WHERE email = ?"
+  database.query(query, [req.body.email], (error, data) => {
     if (error) {
-      return res.json(error);
+      return res.json(error)
     }
-    return res.json("User has been added successfully.");
-  });
+    if (data.length) {
+      return res.status(409).json("User allready exist.")
+    }
+
+    // If youser does not exist create new user
+    // Hash password
+    const salt = bcrypt.genSaltSync(10)
+    const hash = bcrypt.hashSync(req.body.password, salt)
+
+    // Insert user to db
+    const query = "INSERT INTO users (`email`, `password`) VALUES (?)";
+    const values = [req.body.email, hash]
+    database.query(query, [values], (error, data) => {
+
+      // If error show error
+      if (error) {
+        return res.json(error)
+      }
+
+      // If no error than send message
+      return res.status(200).json("User has been created.")
+    })
+  })
 });
 
 module.exports = registerUser;

@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const cookieParser = require("cookie-parser")
 const app = express();
 
 const PORT = process.env.PORT || 8080;
@@ -11,15 +12,24 @@ const addRecipe = require("./routes/addRecipe");
 const registerUser = require("./routes/registerUser");
 const test = require("./routes/test");
 const singleApiData = require("./routes/singleApiData");
+const loginUser = require("./routes/loginUser");
 
-app.use(cors());
+const corsOptions = {
+  origin: "http://localhost:5173", // <- change for your or it wont work
+  credentials: true,
+  optionSuccessStatus:200
+}
+
+app.use(cors(corsOptions));
 app.use("/uploads", express.static("uploads"));
 app.use(express.json());
+app.use(cookieParser())
 
 app.use("/", apiData);
 app.use("/", singleApiData);
 app.use("/", addRecipe);
 app.use("/", registerUser);
+app.use("/", loginUser)
 app.use("/", test);
 
 app.get("/", (req, res) => {
