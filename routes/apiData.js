@@ -19,12 +19,19 @@ const database = require("../database/connection");
 //     })
 // })
 
+// Get all recipes from database
 apiData.get("/api-data", (req, res) => {
+
+  // Make query
   const query = "SELECT * FROM recipes";
   database.query(query, (error, data) => {
+
+    // If there is any error return error as json
     if (error) {
       return res.json(error);
     }
+
+    // If no error, return data as json
     return res.json(data);
   });
 });

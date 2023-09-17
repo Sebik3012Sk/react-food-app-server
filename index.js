@@ -13,6 +13,7 @@ const registerUser = require("./routes/registerUser");
 const test = require("./routes/test");
 const singleApiData = require("./routes/singleApiData");
 const loginUser = require("./routes/loginUser");
+const logoutUser = require("./routes/logoutUser");
 
 const corsOptions = {
   origin: "http://localhost:5173", // <- change for your or it wont work
@@ -30,6 +31,7 @@ app.use("/", singleApiData);
 app.use("/", addRecipe);
 app.use("/", registerUser);
 app.use("/", loginUser)
+app.use("/", logoutUser)
 app.use("/", test);
 
 app.get("/", (req, res) => {
