@@ -2,6 +2,7 @@ const postDatadb = require("express").Router();
 const multer = require("multer");
 const database = require("../database/connection");
 const path = require("path");
+const verify = require("../middleware/verify")
 
 // const database = createConnection({
 //   host: "localhost",
@@ -46,7 +47,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Upload recipe to database
-postDatadb.post("/post-datadb", upload.single("image"), (req, res) => {
+postDatadb.post("/post-datadb", verify, upload.single("image"), (req, res) => {
 
   // Make query
   const query ="INSERT INTO recipes (`title`, `image`, `recipe_text`) VALUES (?)";
